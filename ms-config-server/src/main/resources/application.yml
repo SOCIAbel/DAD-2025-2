@@ -9,7 +9,7 @@ spring:
         git:
           uri: https://github.com/abel592/DAD-2025-2-main.git # ruta del repositorio git
           searchPaths: config-data
-          default-label: main
+          default-label: Main
   security:
     user:
       name: root
