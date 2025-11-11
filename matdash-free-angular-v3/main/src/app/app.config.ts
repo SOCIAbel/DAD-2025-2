@@ -4,7 +4,7 @@ import {
   importProvidersFrom,
 } from '@angular/core';
 import {
-  provideHttpClient,
+  provideHttpClient, withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -26,6 +26,9 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 //Import all material modules
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {urlInterceptor} from "./interceptors/url.interceptor";
+import {tokenInterceptor} from "./interceptors/token.interceptor";
+import {errorInterceptor} from "./interceptors/error.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,7 +41,14 @@ export const appConfig: ApplicationConfig = {
       }),
       withComponentInputBinding()
     ),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi(),
+      withInterceptors([
+        urlInterceptor,      // 1. Primero modifica la URL
+        tokenInterceptor,    // 2. Luego agrega el token
+        errorInterceptor     // 3. Finalmente maneja errores
+      ])
+
+    ),
     provideClientHydration(),
     provideAnimationsAsync(),
     importProvidersFrom(
