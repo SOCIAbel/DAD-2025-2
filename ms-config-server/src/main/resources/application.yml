@@ -7,9 +7,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/abel592/DAD-2025-2-main.git # ruta del repositorio git
+          uri: https://github.com/SOCIAbel/DAD-2025-2.git # ruta del repositorio git
           searchPaths: config-data
-          default-label: Main
+          default-label: main
   security:
     user:
       name: root
